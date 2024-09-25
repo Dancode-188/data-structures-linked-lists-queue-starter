@@ -15,14 +15,13 @@ class DoublyLinkedList {
     }
 
     addToHead(val) {
-        // There are bugs in this method! Fix them!!!
-        // Write your hypothesis on the time complexity of this method here
+        // Time complexity of this method is O(1) because we are directly accessing the head of
+        // the linked list and adding a new node to the head of the linked list.
 
-        // Add node of val to head of linked list
         let newNode = new DoublyLinkedNode(val);
 
-        if (this.length >= 0) {
-            this.head.previous = newNode;
+        if (this.length > 0) {
+            this.head.prev = newNode;
             newNode.next = this.head;
             this.head = newNode;
         } else {
@@ -34,33 +33,77 @@ class DoublyLinkedList {
     }
 
     addToTail(val) {
-        // Add node of val to tail of linked list
+        const newNode = new DoublyLinkedNode(val);
+
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
+        }
+        this.length++;
 
         // Write your hypothesis on the time complexity of this method here
+        // Time complexity of this method is O(1) because we are directly accessing the tail of
+        // the linked list and adding a new node to the tail of the linked list.
     }
 
     removeFromHead() {
-        // Remove node at head
+        if (!this.head) return;
+
+        let removedNode = this.head.value;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+            this.head.prev = null;
+        }
+        this.length--;
+        return removedNode;
 
         // Write your hypothesis on the time complexity of this method here
+        // Time complexity of this method is O(1) because we are directly accessing the head of
+        // the linked list and removing the head of the linked list.
     }
 
     removeFromTail() {
-        // Remove node at tail
+        if (!this.head) return;
+
+        let removedValue = this.tail.value;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+        }
+        this.length--;
+        return removedValue;
 
         // Write your hypothesis on the time complexity of this method here
+        // Time complexity of this method is O(1) because we are directly accessing the tail of
+        // the linked list and removing the tail of the linked list.
     }
 
     peekAtHead() {
-        // Return value of head node
+        if (!this.head) return;
+        return this.head.value;
 
         // Write your hypothesis on the time complexity of this method here
+        // Time complexity of this method is O(1) because we are directly accessing the head of
+        // the linked list and returning the value of the head
     }
 
     peekAtTail() {
-        // Return value of tail node
-        
+        if (!this.tail) return;
+        return this.tail.value;
+
         // Write your hypothesis on the time complexity of this method here
+        // Time complexity of this method is O(1) because we are directly accessing the tail of
+        // the linked list and returning the value of the tail
     }
 }
 
